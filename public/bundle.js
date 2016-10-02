@@ -105,19 +105,19 @@
 
 	var _reactRouter = __webpack_require__(179);
 
+	var _TodoApp = __webpack_require__(242);
+
+	var _TodoApp2 = _interopRequireDefault(_TodoApp);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Load foundation
 	$(document).foundation();
 
 	// App css
-	__webpack_require__(242);
+	__webpack_require__(243);
 
-	_reactDom2.default.render(_react2.default.createElement(
-	  'p',
-	  null,
-	  'Boilerplate 3 Project'
-	), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(_TodoApp2.default, null), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
@@ -27149,13 +27149,43 @@
 /* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoApp = _react2.default.createClass({
+	  displayName: 'TodoApp',
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'TodoApp.jsx rendered!'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TodoApp;
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(243);
+	var content = __webpack_require__(244);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(245)(content, {});
+	var update = __webpack_require__(246)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27172,10 +27202,10 @@
 	}
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(244)();
+	exports = module.exports = __webpack_require__(245)();
 	// imports
 
 
@@ -27186,7 +27216,7 @@
 
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports) {
 
 	/*
@@ -27242,7 +27272,7 @@
 
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
