@@ -27184,19 +27184,20 @@
 	      searchText: '',
 	      todos: [{
 	        id: (0, _nodeUuid2.default)(),
-	        text: 'Walk the dog'
+	        text: 'Walk the dog',
+	        completed: false
 	      }, {
 	        id: (0, _nodeUuid2.default)(),
-	        text: 'Clean the yard'
+	        text: 'Clean the yard',
+	        completed: true
 	      }, {
 	        id: (0, _nodeUuid2.default)(),
-	        text: 'Take out trash'
+	        text: 'Start smoker',
+	        completed: true
 	      }, {
 	        id: (0, _nodeUuid2.default)(),
-	        text: 'Start smoker'
-	      }, {
-	        id: (0, _nodeUuid2.default)(),
-	        text: 'Smoke ribs'
+	        text: 'Smoke ribs',
+	        completed: false
 	      }]
 	    };
 	  },
@@ -27204,9 +27205,20 @@
 	    this.setState({
 	      todos: [].concat(_toConsumableArray(this.state.todos), [{
 	        id: (0, _nodeUuid2.default)(),
-	        text: text
+	        text: text,
+	        completed: false
 	      }])
 	    });
+	  },
+	  handleToggle: function handleToggle(id) {
+	    var updatedTodos = this.state.todos.map(function (todo) {
+	      if (todo.id === id) {
+	        todo.completed = !todo.completed;
+	      }
+
+	      return todo;
+	    });
+	    this.setState({ todos: updatedTodos });
 	  },
 	  handleSearch: function handleSearch(showCompleted, searchText) {
 	    this.setState({
@@ -27222,7 +27234,7 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(_TodoSearch2.default, { onSearch: this.handleSearch }),
-	      _react2.default.createElement(_TodoList2.default, { todos: todos }),
+	      _react2.default.createElement(_TodoList2.default, { todos: todos, onToggle: this.handleToggle }),
 	      _react2.default.createElement(_AddTodo2.default, { onAddTodo: this.handleAddTodo })
 	    );
 	  }
@@ -27252,11 +27264,13 @@
 	  displayName: 'TodoList',
 
 	  render: function render() {
+	    var _this = this;
+
 	    var todos = this.props.todos;
 
 	    var renderTodos = function renderTodos() {
 	      return todos.map(function (todo) {
-	        return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo));
+	        return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo, { onToggle: _this.props.onToggle }));
 	      });
 	    };
 
@@ -27274,7 +27288,7 @@
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _react = __webpack_require__(8);
 
@@ -27283,18 +27297,22 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Todo = _react2.default.createClass({
-	  displayName: 'Todo',
+	  displayName: "Todo",
 
 	  render: function render() {
+	    var _this = this;
+
 	    var _props = this.props;
 	    var text = _props.text;
 	    var id = _props.id;
+	    var completed = _props.completed;
 
 	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      id,
-	      '. ',
+	      "div",
+	      { onClick: function onClick() {
+	          _this.props.onToggle(id);
+	        } },
+	      _react2.default.createElement("input", { type: "checkbox", checked: completed }),
 	      text
 	    );
 	  }
