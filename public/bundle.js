@@ -27155,20 +27155,43 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _TodoList = __webpack_require__(247);
+
+	var _TodoList2 = _interopRequireDefault(_TodoList);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TodoApp = _react2.default.createClass({
 	  displayName: 'TodoApp',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      todos: [{
+	        id: 1,
+	        text: 'Walk the dog'
+	      }, {
+	        id: 2,
+	        text: 'Clean the yard'
+	      }, {
+	        id: 3,
+	        text: 'Take out trash'
+	      }, {
+	        id: 4,
+	        text: 'Start smoker'
+	      }, {
+	        id: 5,
+	        text: 'Smoke ribs'
+	      }]
+	    };
+	  },
 	  render: function render() {
+	    var todos = this.state.todos;
+
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'TodoApp.jsx rendered!'
-	      )
+	      _react2.default.createElement(_TodoList2.default, { todos: todos })
 	    );
 	  }
 	});
@@ -27522,6 +27545,78 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Todo = __webpack_require__(248);
+
+	var _Todo2 = _interopRequireDefault(_Todo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoList = _react2.default.createClass({
+	  displayName: 'TodoList',
+
+	  render: function render() {
+	    var todos = this.props.todos;
+
+	    var renderTodos = function renderTodos() {
+	      return todos.map(function (todo) {
+	        return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo));
+	      });
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      renderTodos()
+	    );
+	  }
+	});
+
+	module.exports = TodoList;
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Todo = _react2.default.createClass({
+	  displayName: 'Todo',
+
+	  render: function render() {
+	    var _props = this.props;
+	    var text = _props.text;
+	    var id = _props.id;
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      id,
+	      '. ',
+	      text
+	    );
+	  }
+	});
+
+	module.exports = Todo;
 
 /***/ }
 /******/ ]);
