@@ -115,7 +115,7 @@
 	$(document).foundation();
 
 	// App css
-	__webpack_require__(243);
+	__webpack_require__(246);
 
 	_reactDom2.default.render(_react2.default.createElement(_TodoApp2.default, null), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
@@ -27155,9 +27155,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TodoList = __webpack_require__(247);
+	var _TodoList = __webpack_require__(243);
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
+
+	var _AddTodo = __webpack_require__(245);
+
+	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27184,6 +27188,9 @@
 	      }]
 	    };
 	  },
+	  handleAddTodo: function handleAddTodo(text) {
+	    alert('new todo: ' + text);
+	  },
 	  render: function render() {
 	    var todos = this.state.todos;
 
@@ -27191,7 +27198,8 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_TodoList2.default, { todos: todos })
+	      _react2.default.createElement(_TodoList2.default, { todos: todos }),
+	      _react2.default.createElement(_AddTodo2.default, { onAddTodo: this.handleAddTodo })
 	    );
 	  }
 	});
@@ -27202,13 +27210,131 @@
 /* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Todo = __webpack_require__(244);
+
+	var _Todo2 = _interopRequireDefault(_Todo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoList = _react2.default.createClass({
+	  displayName: 'TodoList',
+
+	  render: function render() {
+	    var todos = this.props.todos;
+
+	    var renderTodos = function renderTodos() {
+	      return todos.map(function (todo) {
+	        return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo));
+	      });
+	    };
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      renderTodos()
+	    );
+	  }
+	});
+
+	module.exports = TodoList;
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Todo = _react2.default.createClass({
+	  displayName: 'Todo',
+
+	  render: function render() {
+	    var _props = this.props;
+	    var text = _props.text;
+	    var id = _props.id;
+
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      id,
+	      '. ',
+	      text
+	    );
+	  }
+	});
+
+	module.exports = Todo;
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AddTodo = _react2.default.createClass({
+	  displayName: 'AddTodo',
+
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    var todoText = this.refs.todoText.value;
+
+	    if (todoText.length > 0) {
+	      this.refs.todoText.value = '';
+	      this.props.onAddTodo(todoText);
+	    } else {
+	      this.refs.todoText.focus();
+	    }
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit },
+	        _react2.default.createElement('input', { type: 'text', placeholder: 'Add new todo', ref: 'todoText' }),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'button expanded' },
+	          'Add Todo'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = AddTodo;
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(244);
+	var content = __webpack_require__(247);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(246)(content, {});
+	var update = __webpack_require__(249)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27225,10 +27351,10 @@
 	}
 
 /***/ },
-/* 244 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(245)();
+	exports = module.exports = __webpack_require__(248)();
 	// imports
 
 
@@ -27239,7 +27365,7 @@
 
 
 /***/ },
-/* 245 */
+/* 248 */
 /***/ function(module, exports) {
 
 	/*
@@ -27295,7 +27421,7 @@
 
 
 /***/ },
-/* 246 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27545,78 +27671,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(8);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Todo = __webpack_require__(248);
-
-	var _Todo2 = _interopRequireDefault(_Todo);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TodoList = _react2.default.createClass({
-	  displayName: 'TodoList',
-
-	  render: function render() {
-	    var todos = this.props.todos;
-
-	    var renderTodos = function renderTodos() {
-	      return todos.map(function (todo) {
-	        return _react2.default.createElement(_Todo2.default, _extends({ key: todo.id }, todo));
-	      });
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      renderTodos()
-	    );
-	  }
-	});
-
-	module.exports = TodoList;
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(8);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Todo = _react2.default.createClass({
-	  displayName: 'Todo',
-
-	  render: function render() {
-	    var _props = this.props;
-	    var text = _props.text;
-	    var id = _props.id;
-
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      id,
-	      '. ',
-	      text
-	    );
-	  }
-	});
-
-	module.exports = Todo;
 
 /***/ }
 /******/ ]);
