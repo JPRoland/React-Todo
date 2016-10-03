@@ -115,7 +115,7 @@
 	$(document).foundation();
 
 	// App css
-	__webpack_require__(270);
+	__webpack_require__(271);
 
 	_reactDom2.default.render(_react2.default.createElement(_TodoApp2.default, null), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
@@ -27171,6 +27171,10 @@
 
 	var _nodeUuid2 = _interopRequireDefault(_nodeUuid);
 
+	var _TodoAPI = __webpack_require__(270);
+
+	var _TodoAPI2 = _interopRequireDefault(_TodoAPI);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -27182,24 +27186,11 @@
 	    return {
 	      showCompleted: false,
 	      searchText: '',
-	      todos: [{
-	        id: (0, _nodeUuid2.default)(),
-	        text: 'Walk the dog',
-	        completed: false
-	      }, {
-	        id: (0, _nodeUuid2.default)(),
-	        text: 'Clean the yard',
-	        completed: true
-	      }, {
-	        id: (0, _nodeUuid2.default)(),
-	        text: 'Start smoker',
-	        completed: true
-	      }, {
-	        id: (0, _nodeUuid2.default)(),
-	        text: 'Smoke ribs',
-	        completed: false
-	      }]
+	      todos: _TodoAPI2.default.getTodos()
 	    };
+	  },
+	  componentDidUpdate: function componentDidUpdate() {
+	    _TodoAPI2.default.setTodos(this.state.todos);
 	  },
 	  handleAddTodo: function handleAddTodo(text) {
 	    this.setState({
@@ -31702,13 +31693,37 @@
 /* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	module.exports = {
+	  setTodos: function setTodos(todos) {
+	    if ($.isArray(todos)) {
+	      localStorage.setItem('todos', JSON.stringify(todos));
+	      return todos;
+	    }
+	  },
+	  getTodos: function getTodos() {
+	    var stringTodos = localStorage.getItem('todos');
+	    var todos = [];
+	    try {
+	      todos = JSON.parse(stringTodos);
+	    } catch (e) {}
+	    return $.isArray(todos) ? todos : [];
+	  }
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(271);
+	var content = __webpack_require__(272);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(273)(content, {});
+	var update = __webpack_require__(274)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31725,10 +31740,10 @@
 	}
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(272)();
+	exports = module.exports = __webpack_require__(273)();
 	// imports
 
 
@@ -31739,7 +31754,7 @@
 
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports) {
 
 	/*
@@ -31795,7 +31810,7 @@
 
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
