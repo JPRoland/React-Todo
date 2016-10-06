@@ -4,6 +4,7 @@ import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
 import uuid from 'node-uuid';
 import TodoAPI from 'TodoAPI';
+import moment from 'moment';
 
 const TodoApp = React.createClass({
   getInitialState: function() {
@@ -23,7 +24,9 @@ const TodoApp = React.createClass({
         {
           id: uuid(),
           text: text,
-          completed: false
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
         }
       ]
     });
@@ -32,6 +35,7 @@ const TodoApp = React.createClass({
     const updatedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
+        todo.completedAt = todo.completed ? moment().unix() : undefined;
       }
 
       return todo;
