@@ -32,7 +32,6 @@ export const todosReducer = (state = [], action) => {
           completedAt: undefined
         }
       ];
-    // add case for TOGGLE_TODO, match action id and negate completed and update completedAt
     case 'TOGGLE_TODO':
       return state.map((todo) => {
         if (todo.id === action.id) {
@@ -43,6 +42,8 @@ export const todosReducer = (state = [], action) => {
             completed: nextCompleted,
             completedAt: nextCompleted ? moment().unix() : undefined
           };
+        } else {
+          return todo;
         }
       });
     default:
