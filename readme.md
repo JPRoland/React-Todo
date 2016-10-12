@@ -1,1 +1,1 @@
-React Boilerplate Project
+React Todo List App
