@@ -11,9 +11,6 @@ store.subscribe(() => {
   console.log('New state', store.getState());
 });
 
-store.dispatch(actions.addTodo('Clean the house'));
-store.dispatch(actions.setSearchText('house'));
-store.dispatch(actions.toggleShowCompleted());
 // Load foundation
 $(document).foundation();
 
